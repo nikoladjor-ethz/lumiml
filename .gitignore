@@ -117,4 +117,5 @@ dmypy.json
 #myfiles
 setup.py
 test/
+scripts/
 
