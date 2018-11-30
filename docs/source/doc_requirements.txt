@@ -1,3 +1,5 @@
 numpydoc
-sklearn
+numpy
+scikit-learn
+scipy
 dill
