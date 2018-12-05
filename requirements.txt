@@ -1,0 +1,4 @@
+numpy==1.15.4
+dill==0.2.8.2
+scipy==1.1.0
+scikit_learn==0.20.1
