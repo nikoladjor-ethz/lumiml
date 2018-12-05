@@ -8,13 +8,12 @@ Welcome to LumiML's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
-
+   guide
+   modules
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search`

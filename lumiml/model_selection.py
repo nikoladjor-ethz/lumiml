@@ -8,11 +8,13 @@ class PoissonElasticNetCV(GridSearchCV):
     Helper class for performing grid search cross-validation. This class inherits all properties from
     sklearn.model_selection.GridSearchCV. For information about all other parameters not explained below,
     please refer to GridSearch `documentation
-    <https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html>`_
+    <https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html>`_.
 
     Parameters
     ----------
     estimator
+        Estimator having a ``fit()`` and ``score()`` methods. By default,
+        you should use :py:class:`~lumiml.models.PoissonElasticNet`.
     param_grid
     scoring
     fit_params

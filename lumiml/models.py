@@ -72,6 +72,27 @@ class PoissonElasticNet(LinearModel, RegressorMixin):
 
     @staticmethod
     def loss_enet(X, y, reg_lambda, alpha, theta):
+        """
+
+        Parameters
+        ----------
+        X : np.ndarray
+            Features matrix to calculate prediction
+        y: np.ndarray
+            Data being modelled.
+        reg_lambda : float
+            Regularization parameter
+        alpha : float
+            Ratio between the L1 and L2 penalties.
+        theta : np.ndarray
+            Vector of coefficients.
+
+        Returns
+        -------
+        float
+            Regularized log-likelihood loss.
+
+        """
         y_hat = theta[0] + np.dot(X, theta[1:])
         n_samples = X.shape[0]
         l1_pen = reg_lambda * alpha * np.linalg.norm(theta[1:], 1)
@@ -87,6 +108,24 @@ class PoissonElasticNet(LinearModel, RegressorMixin):
 
     @staticmethod
     def loglike_loss(X, y, theta):
+        """
+
+        Parameters
+        ----------
+        X
+        y
+        theta
+
+        Returns
+        -------
+        float
+            Log-likelihood loss.
+
+        Warnings
+        --------
+        Ignored.
+
+        """
         y_hat = PoissonElasticNet.predict_(X, theta)
         n_samples = X.shape[0]
         loss_ = np.sum(y_hat - y * np.log(y_hat)) / n_samples
@@ -94,6 +133,29 @@ class PoissonElasticNet(LinearModel, RegressorMixin):
 
     @staticmethod
     def optimization_loss(theta, grad, X, y, reg_lambda, alpha):
+        """
+
+        Parameters
+        ----------
+        theta : np.ndarray
+            Vector of coefficients.
+        grad
+            Gradient, required for nlopt. Essentially, it is ignored, since we perform optimization without a gradient.
+        X : np.ndarray
+            Features matrix generated with certain basis.
+        y : np.ndarray
+            Data being modelled.
+        reg_lambda : float
+            Regularization parameter.
+        alpha : float
+            Ratio between the L1 and L2 penalties.
+
+        Returns
+        -------
+        float
+            Loss used for optimization.
+
+        """
         if grad.size > 0:
             grad[:] = 0
         return PoissonElasticNet.loss_enet(X, y, reg_lambda, alpha, theta)
@@ -157,7 +219,7 @@ class PoissonElasticNet(LinearModel, RegressorMixin):
 
         return self
 
-    def predict(self, X: np.ndarray) -> np.ndarray:
+    def predict(self, X):
         """
 
         Parameters
@@ -173,7 +235,7 @@ class PoissonElasticNet(LinearModel, RegressorMixin):
         """
         return self.coef_[0] + X.dot(self.coef_[1:])
 
-    def score(self, X: np.ndarray, y: np.ndarray, sample_weight: np.ndarray = None) -> float:
+    def score(self, X, y, sample_weight=None):
         """
 
         Parameters

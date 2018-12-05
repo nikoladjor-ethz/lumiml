@@ -118,4 +118,5 @@ dmypy.json
 setup.py
 test/
 scripts/
+lumiml/examples
 
