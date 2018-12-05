@@ -118,5 +118,6 @@ dmypy.json
 setup.py
 test/
 scripts/
-lumiml/examples
+lumiml/examples/_*
+
 
