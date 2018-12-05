@@ -47,7 +47,7 @@ extensions = [
     'numpydoc',
 ]
 numpydoc_show_class_members = True
-#autodoc_mock_imports = ["nlopt"]
+autodoc_mock_imports = ["nlopt"]
 
 
 # Add any paths that contain templates here, relative to this directory.
