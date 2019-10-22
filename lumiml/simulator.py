@@ -97,9 +97,16 @@ class ContinuousDistribution(DecayDistribution):
         rho_ = self.distribution.pdf(self.gamma_eval, **self.kwargs)
         return rho_.copy()
 
+    @staticmethod
+    def _get_y(t, rho, gamma_eval):
+        if t < 0:
+            return 0
+        else:
+            return integrate.trapz(rho * np.exp(-t * gamma_eval), gamma_eval)
+
     def transform(self, time_scale):
         rho = self._distribution_function()
-        get_y = lambda t: integrate.trapz(rho * np.exp(-t * self.gamma_eval), self.gamma_eval)
+        get_y = lambda t: self._get_y(t, rho, self.gamma_eval)
         ss = np.array([int(x >= 0) for x in time_scale])
         y = np.asarray(list(map(get_y, time_scale)))
         y_transform = ss * y
